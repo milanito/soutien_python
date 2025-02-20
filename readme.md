@@ -142,6 +142,25 @@ find_path(matrix, 11)
 ```
 Found a path!
 ```
+
+### **🏆 Correction**
+```python
+def find_path(matrix, target):
+    def explore(i, j, total):
+        if i >= len(matrix) or j >= len(matrix[0]):
+            return False
+        total += matrix[i][j]
+        if i == len(matrix) - 1 and j == len(matrix[0]) - 1:
+            if total == target:
+                print("Found a path!")
+                return True
+            return False
+        return explore(i + 1, j, total) or explore(i, j + 1, total)
+
+    if not explore(0, 0, 0):
+        print("No path found")
+```
+
 ---
 
 ## **🛠 Exercise 4: Counting Leaf Nodes in a Binary Tree**
