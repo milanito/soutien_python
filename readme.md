@@ -149,10 +149,9 @@ Compare two methods for **searching for a number in a sorted matrix**.
 #### **Input**
 ```python
 matrix = [
-    [1, 4, 7, 11],
-    [2, 5, 8, 12],
-    [3, 6, 9, 16],
-    [10, 13, 14, 17]
+    [1, 4, 7, 10],
+    [2, 5, 8, 11],
+    [3, 6, 9, 12],
 ]
 search_matrix(matrix, 9)
 ```
