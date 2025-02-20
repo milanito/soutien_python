@@ -84,6 +84,38 @@ print_inorder(tree)
 4 2 5 1 7 3
 ```
 
+### **🏆 Correction**
+```python
+def list_to_tree(lst):
+    if len(lst) == 0:
+        return None
+
+    nodes = []
+    for val in lst:
+        if val is None:
+            nodes.append(None)
+        else:
+            nodes.append(TreeNode(val, None, None))
+
+    for i in range(len(lst)):
+        if nodes[i] is not None:
+            left_index = 2 * i + 1
+            right_index = 2 * i + 2
+            if left_index < len(lst):
+                nodes[i].left = nodes[left_index]
+            if right_index < len(lst):
+                nodes[i].right = nodes[right_index]
+
+    return nodes[0]
+
+def print_inorder(root):
+    if root:
+        print_inorder(root.left)
+        print(root.val, end=" ")
+        print_inorder(root.right)
+```
+
+
 ---
 
 ## **🛏 Exercise 3: Finding a Path in a Matrix**
