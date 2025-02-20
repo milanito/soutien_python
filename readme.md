@@ -42,6 +42,24 @@ Matrix:
 4 5 6
 7 8 9
 ```
+
+### **🏆 Correction**
+```python
+class TreeNode:
+    def __init__(self, val, left, right):
+        self.val = val
+        self.left = left
+        self.right = right 
+
+def print_matrix(matrix):
+    print("Matrix:")
+    for row in matrix:
+        line = ""
+        for value in row:
+            line += str(value) + " "
+        print(line)
+```
+
 ---
 
 ## **🌱 Exercise 2: Building a Binary Tree from a List**
