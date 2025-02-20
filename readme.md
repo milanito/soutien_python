@@ -182,6 +182,17 @@ print(count_leaves(tree))
 ```
 3
 ```
+
+### **🏆 Correction**
+```python
+def count_leaves(root):
+    if not root:
+        return 0
+    if not root.left and not root.right:
+        return 1
+    return count_leaves(root.left) + count_leaves(root.right)
+```
+
 ---
 
 ## **💰 Exercise 5: Finding the Maximum Sum Path in a Binary Tree**
