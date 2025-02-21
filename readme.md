@@ -214,6 +214,14 @@ print(max_sum_path(tree))
 ```
 55
 ```
+
+### **🏆 Correction**
+```python
+def max_sum_path(root):
+    if not root:
+        return 0
+    return root.val + max(max_sum_path(root.left), max_sum_path(root.right))
+```
 ---
 
 ## **⚡ Exercise 6: Brute-Force vs. Optimized Matrix Search**
@@ -229,9 +237,10 @@ Compare two methods for **searching for a number in a sorted matrix**.
 #### **Input**
 ```python
 matrix = [
-    [1, 4, 7, 10],
-    [2, 5, 8, 11],
-    [3, 6, 9, 12],
+    [1, 4, 7, 11],
+    [2, 5, 8, 12],
+    [3, 6, 9, 16],
+    [10, 13, 14, 17]
 ]
 search_matrix(matrix, 9)
 ```
@@ -240,6 +249,34 @@ search_matrix(matrix, 9)
 Brute-force: Found 9 in 0.0004 seconds
 Optimized: Found 9 in 0.0001 seconds
 ```
+
+### **🏆 Correction**
+```python
+import time
+
+def search_matrix_brute(matrix, target):
+    start = time.time()
+    for row in matrix:
+        for value in row:
+            if value == target:
+                print(f"Brute-force: Found {target} in {time.time() - start:.4f} seconds")
+                return
+    print("Not found")
+
+def search_matrix_optimized(matrix, target):
+    start = time.time()
+    i, j = 0, len(matrix[0]) - 1
+    while i < len(matrix) and j >= 0:
+        if matrix[i][j] == target:
+            print(f"Optimized: Found {target} in {time.time() - start:.4f} seconds")
+            return
+        elif matrix[i][j] > target:
+            j -= 1
+        else:
+            i += 1
+    print("Not found")
+```
+
 ---
 
 ## **🌳 Exercise 7: Printing All Paths from Root to Leaf in a Binary Tree**
@@ -263,6 +300,18 @@ print_all_paths(tree)
 1 → 2 → 5
 1 → 3 → 6
 1 → 3 → 7
+```
+
+### **🏆 Correction**
+```python
+def print_all_paths(root, path=""):
+    if not root:
+        return
+    new_path = path + str(root.val) + " → "
+    if not root.left and not root.right:
+        print(new_path[:-3])
+    print_all_paths(root.left, new_path)
+    print_all_paths(root.right, new_path)
 ```
 
 ---
@@ -291,4 +340,30 @@ compare_methods(matrix)
 Brute-force: 0.4 seconds
 Optimized DP: 0.002 seconds
 ```
+
+### **🏆 Correction**
+```python
+import time
+
+def longest_path_brute(matrix, i, j, prev_val):
+    if i < 0 or j < 0 or i >= len(matrix) or j >= len(matrix[0]) or matrix[i][j] <= prev_val:
+        return 0
+    return 1 + max(
+        longest_path_brute(matrix, i + 1, j, matrix[i][j]),
+        longest_path_brute(matrix, i, j + 1, matrix[i][j])
+    )
+
+def longest_path_dp(matrix):
+    dp = [[-1] * len(matrix[0]) for _ in range(len(matrix))]
+    def explore(i, j, prev_val):
+        if i < 0 or j < 0 or i >= len(matrix) or j >= len(matrix[0]) or matrix[i][j] <= prev_val:
+            return 0
+        if dp[i][j] != -1:
+            return dp[i][j]
+        dp[i][j] = 1 + max(explore(i + 1, j, matrix[i][j]), explore(i, j + 1, matrix[i][j]))
+        return dp[i][j]
+    return explore(0, 0, -1)
+```
+
+
 
